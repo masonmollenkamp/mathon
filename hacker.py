@@ -1,8 +1,8 @@
 import random
-
+e=random.randrange(1,16)
 d = ""
 count = 0
-while count < :
+while count < e:
     d = d + (str(chr(random.randrange(ord('A'),ord('Z')))))
     count = count + 1
 
