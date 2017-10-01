@@ -1,9 +1,9 @@
-print ("for some reson the thig prints 4 answers the ones in the middle are correct")
+print ("for some reson the thig prints 4 answers the\n ones on the middle are correct \nand the continuing thing is brocen on mulipaction")
 i = (5)
 done = (0)
 for i in range (0,10):
   if(done == 2):
-      break
+      break 
   
   ecwater =(eval(input("1 = + 2 = - 3 = x 4 = %")))
   three = 0 
@@ -47,3 +47,9 @@ for i in range (0,10):
   if (done1 == 1):
     done = 1
     done = (1)
+rateing = (eval(input("plese rate 1-10")))
+if (rateing <= 4):
+  why = input("why")
+  print ("plese contact masonmollenkamp@gmail.com")
+else:
+  print("if you want to add something contact\nmasonmollnekamp@gmail.com")
