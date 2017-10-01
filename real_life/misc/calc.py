@@ -1,4 +1,4 @@
-print ("for some reson the thig prints 4 answers the\n ones on the middle arecorrect \nand the continuing thing is brocen on mulipaction")
+print ("the continuing thing is brocen on mulipaction")
 i = (5)
 done = (0)
 for i in range (0,10):
