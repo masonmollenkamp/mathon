@@ -20,21 +20,22 @@ for i in range (0,10):
       print(first_number)
       done = 1
   if (three_number == 0):
-      print (first_number - two_number)
+      first_number = (first_number - two_number)
+      print (first_number)
   if (ecwater == 2):
     if(three_number == 1):
       first_number = (first_number - two_number - three)
       print(first_number)
       done = 1
   if (three_number == 0):
-      print (first_number * two_number)
+      first_number = (first_number * two_number)
   if (ecwater == 3):
     if(three_number == 1):
       first_number = (first_number * two_number * three)
       print(first_number)
       done = 1
   if (three_number == 0):
-      print (first_number * two_number)
+      first_number + (first_number * two_number)
   if (ecwater == 4):
      if(three_number == 1):
        answer = (first_number / two_number)
