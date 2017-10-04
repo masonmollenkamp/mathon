@@ -1,0 +1,13 @@
+l = (input("word"))
+a = (len(l))
+stuff = (eval(input("encript 1 decript 0 3 10 or grator nuber")))
+if (stuff == 1):
+  h = l[1:] + l[:1]
+  i = h[:2] + h[3:]+ h[2:3]
+  print (i)
+elif(stuff == 0):
+  for x in l:
+    print(chr(ord(x) + 1), end='') 
+else:
+  for x in l:
+    print(chr(ord(x) - 1), end='') 
