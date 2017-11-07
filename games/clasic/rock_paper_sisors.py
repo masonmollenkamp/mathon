@@ -3,6 +3,7 @@ m = ["rock", "paper", "sisors"]
 com = random.choice(m)
 player = input("rock paper sisors or quit")
 while (player != "quit"):
+  com = random.choice(m)
   if (player == "paper"):
     if com == "sisors":
       print("com wins")
