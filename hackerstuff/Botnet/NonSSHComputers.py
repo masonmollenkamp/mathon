@@ -9,10 +9,11 @@ while 1:
     s.listen(1)
     data = ""
     conn, addr = s.accept()
+    print("New Connection")        
     jstring = ""
     while data != "\n":
 
         data = conn.recv(1).decode("utf-8")
         jstring += data
-
+    print("Running", jstring)
     s.send(os.system(jstring).encode('utf-8'))
