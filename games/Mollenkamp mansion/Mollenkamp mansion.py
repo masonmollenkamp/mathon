@@ -28,8 +28,9 @@ rooms = {"Redroom" :
          {
              "Locked" : "unlocked",
              "Mysterious SSD" :
-             ["There are two screws on the back.", {"unscrew" : """rooms[\"redroom\"] += {\"Reddit Badge\" : [\"It looks like it fits the slots on the jersy but there is nine slots.\", {\"Put in slot\" : \"\"\"if input(\"What slot\") == \"4\":
-    rooms[\"Whiteroom\"][\"Locked\"] = \"unlocked\"}]}"""}],
+             ["it's a table", {"unscrew" : """rooms[redroom] += {\"Badge\" : [\"it can go into one of the slots in the jacket.\", {\"Put pin in holes\" : \"\"\"if computerDone == 1 && input(\"which hole\") == 4:
+	print(\"The right latch on the white door is open\")
+	badge = True\"\"\""""]}],
              "chair" :
              ["it's a chair", "sit"]},
          "blueroom" :
@@ -48,6 +49,9 @@ def doGameItaration():
         print("Player wakes up in their normal room, but it feels wobbly. They go and open their door and see a sign in a white room ‘Pick a door red or blue, there is a white door in front of them, to the left there is a red and a blue door.")
     elif gameIteration == 2:
         print("The room seems to be themed around bannana(C) the computer company")
+        if computerDone == True  &&  Bannana == "*":
+            gameIteration == 4
+            doGameItaration
 commandList = []
 
 for room in rooms:
