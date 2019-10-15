@@ -10,6 +10,8 @@ invatory = ["Redroom key"]
 currentRoom = "redroom"
 gameIteration = 1
 Quit = False
+computerDone = False
+Bannana = True
 
 rooms = {"Redroom" :
          {
@@ -27,17 +29,21 @@ rooms = {"Redroom" :
          "redroom" :
          {
              "Locked" : "unlocked",
-             "Mysterious SSD" :
-             ["it's a table", {"unscrew" : """rooms[redroom] += {\"Badge\" : [\"it can go into one of the slots in the jacket.\", {\"Put pin in holes\" : \"\"\"if computerDone == 1 && input(\"which hole\") == 4:
-	print(\"The right latch on the white door is open\")
-	badge = True\"\"\""""]}],
+             "SSD" :
+             ["it's a table", {"unscrew" : """rooms[\"redroom\"].update({\"Badge\" : [\"it can go into one of the slots in the jacket.\", {\"Put pin in holes\" : \"\"\"if computerDone == 1 && input(\\\"which hole\\\") == 4:
+	print(\\\"The right latch on the white door is open\\\")
+	badge = True\"\"\"}]})"""}],
              "chair" :
-             ["it's a chair", "sit"]},
+             ["it's a chair", {"sit" : "print(\"You sit down in the chair, and think...\n\n\n\n\n\n Ok thinking is now done."}]},
          "blueroom" :
          {
              "Locked" : "unlocked",
-             "Saw" : ["it's just a saw", {"litraly nothing" : "print(\"seriosly\")"}, 2, {1 : "the saw won't snap"}]
-             "computer" : ["no logo", {"use another item" : " Bannana = print(\"A load sound breaks the silence, you look at the white door and the left latch has opened. you get it, you had to add the logo to the Bannana(C) computer\") + \"*\" if (input(\"What item\").lower == \"saw\") else print(\"Nothing Happens\")", "play on computer" : "print(\"You get on the computer. A file called Mollenkamp mansion opens up, then you relize that the computer is your computer and an error message occurs on your computer. Hmm, you'll need a new app to open this error link... Aha! it means that the programers made a mistake!\")\nfor i in range(5):\n  os.system(\'start \\\"Mollenkamp mansion.py\\\"\\\necho Error: Virus detected.\')"},
+             "Saw" : ["it's just a saw", {"litraly nothing" : "print(\"seriosly\")"}, 2, {1 : "the saw won't snap"}],
+             "computer" : ["no logo", {"use another item" : """if (input(\"What item\") == \"saw\"):
+    Bannana = True
+    print(\"You use the saw to cut a bannana silhouette out of the side of the computer so you can put the bannana inside. when you put the bannana in the light on the front of the computer ligths up and the left latch of the white door is open.\")
+else: 
+    print(\"Nothing Happens\")""", "play on computer" : "print(\"You get on the computer. A file called Mollenkamp mansion opens up, then you relize that the computer is your computer and an error message occurs on your computer. Hmm, you'll need a new app to open this error link... Aha! it means that the programers made a mistake!\")\nfor i in range(5):\n  os.system(\'start \\\"Mollenkamp mansion.py\\\"\\\necho Error: Virus detected.\')"},
              0, {1 : "its a computer do you think your going to smash it with your bare hand?"}],
              "bananas" : ["there are three of them", {"eat" : "print(\"Attack the bannanas to eat them.\")"}, 2, {1 : "There are 2 of them"}]}
     }
@@ -49,7 +55,7 @@ def doGameItaration():
         print("Player wakes up in their normal room, but it feels wobbly. They go and open their door and see a sign in a white room ‘Pick a door red or blue, there is a white door in front of them, to the left there is a red and a blue door.")
     elif gameIteration == 2:
         print("The room seems to be themed around bannana(C) the computer company")
-        if computerDone == True  &&  Bannana == "*":
+        if computerDone == True  &  Bannana == "*":
             gameIteration == 4
             doGameItaration
 commandList = []
@@ -142,7 +148,11 @@ def attack(item, type):
                     rooms[currentRoom][item][0] = rooms[currentRoom][item][3][rooms[currentRoom][item][2]]
     return rooms[currentRoom][item][0]
 
-gameIteration = eval(input("Put in a password or just press enter."))
+try:
+    gameIteration = eval(input("Put in a password or just press enter."))
+except SyntaxError:
+    gameIteration = 1
+
 if gameIteration == "":
     gameIteration == 1
 

