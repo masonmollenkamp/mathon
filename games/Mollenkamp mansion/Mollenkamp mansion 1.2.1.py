@@ -1,22 +1,22 @@
 import sys
 import random
 import os
-
-os.system('clear')
-help = "List of commands:\n1.inspect or examine, type one and then the item name\n2.interact or use, type one and then the item name\n3.inspect or examine, type one and then the item name"
+import time
+os.system('cls')
+help = "List of commands:\n1.inspect or examine, type one and then the item name\n2.interact or use, type one and then the item name\n3.unlock or open, type one and then the room name\n4.goto or move type on and then the room\n5. attack ot hit type one and the item name\n you can also use exec to run python commands to mess with the game, don't have too much fun though"
 print(help)
 
-invatory = ["Redroom key"]
+invatory = [""]
 currentRoom = "redroom"
 gameIteration = 1
 Quit = False
 computerDone = False
 Bannana = True
 
-rooms = {"Redroom" :
+rooms = {"Testroom" :
          {
            "Locked"  :
-            "locked", 
+            "unlocked", 
             "Bed" :
               ["it's a bed", {
                   "sleep " : "Sleeping...", "jhgdfsjf " : "hjrfgrjdfghrj f"}],
@@ -41,6 +41,7 @@ rooms = {"Redroom" :
              "Saw" : ["it's just a saw", {"litraly nothing" : "print(\"seriosly\")"}, 2, {1 : "the saw won't snap"}],
              "computer" : ["no logo", {"use another item" : """if (input(\"What item\") == \"saw\"):
     Bannana = True
+    os.system('echo Welcome to BannanaOS, Type help or a command')
     print(\"You use the saw to cut a bannana silhouette out of the side of the computer so you can put the bannana inside. when you put the bannana in the light on the front of the computer ligths up and the left latch of the white door is open.\")
 else: 
     print(\"Nothing Happens\")""", "play on computer" : "print(\"You get on the computer. A file called Mollenkamp mansion opens up, then you relize that the computer is your computer and an error message occurs on your computer. Hmm, you'll need a new app to open this error link... Aha! it means that the programers made a mistake!\")\nfor i in range(5):\n  os.system(\'start \\\"Mollenkamp mansion.py\\\"\\\necho Error: Virus detected.\')"},
@@ -51,6 +52,13 @@ else:
 
 def doGameItaration():
     global gameIteration
+    for room in rooms:
+        print(room + "contains:")
+        time.sleep(1)
+        for item in rooms[room]:
+            if item != "Locked":
+                print(item) 
+        print()
     if gameIteration == 1:
         print("Player wakes up in their normal room, but it feels wobbly. They go and open their door and see a sign in a white room ‘Pick a door red or blue, there is a white door in front of them, to the left there is a red and a blue door.")
     elif gameIteration == 2:
@@ -106,7 +114,7 @@ def moveRoom(x):
     print("Locked") 
     print("You are now in {}".format(currentRoom))
     for item in rooms[currentRoom]:
-        if "Locked" not in item:
+        if {"Locked" : "unlocked"} != item:
             print(item)
 
 def unlock(room):
@@ -157,6 +165,7 @@ if gameIteration == "":
     gameIteration == 1
 
 while Quit != True:
+    os.system("cls")
     doGameItaration()
     Command = ""
     Command = input()
