@@ -54,6 +54,9 @@ else:
 def doGameItaration():
     global gameIteration
 
+    commandList = [] #reset list of commands
+
+    
     #for every room get every items every command and make a list like this [[play games, phone], [login, computer]]
     for room in rooms: 
         for item in rooms[room]:
