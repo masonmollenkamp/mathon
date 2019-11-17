@@ -107,6 +107,8 @@ def moveRoom(x):
                 print(x)
                 if x == "blueroom":
                     gameIteration = 2
+                elif x == "redroom":
+                    gameIteration = 3
             else:
                 Error.append("*")
         else:
@@ -165,6 +167,7 @@ if gameIteration == "":
     gameIteration == 1
 
 while Quit != True:
+    time.sleep(5)
     os.system("cls")
     doGameItaration()
     Command = ""
