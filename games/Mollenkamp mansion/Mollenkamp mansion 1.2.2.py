@@ -6,6 +6,7 @@ os.system('cls')
 help = "List of commands:\n1.inspect or examine, type one and then the item name\n2.interact or use, type one and then the item name\n3.unlock or open, type one and then the room name\n4.goto or move type on and then the room\n5. attack ot hit type one and the item name\n you can also use exec to run python commands to mess with the game, don't have too much fun though"
 print(help)
 
+commandList = [] #list of commands
 invatory = [""]
 currentRoom = "redroom"
 gameIteration = 1
@@ -52,9 +53,17 @@ else:
 
 def doGameItaration():
     global gameIteration
+
+    #for every room get every items every command and make a list like this [[play games, phone], [login, computer]]
+    for room in rooms: 
+        for item in rooms[room]:
+            for command in rooms[room][item][1]:
+                commandList.append([command, item])
+    
+    #prints all items in all rooms
     for room in rooms:
         print(room + "contains:")
-        time.sleep(1)
+        time.sleep(1) #See 'Why list is slow.mp4'
         for item in rooms[room]:
             if item != "Locked":
                 print(item) 
@@ -66,29 +75,26 @@ def doGameItaration():
         if computerDone == True  &  Bannana == "*":
             gameIteration == 4
             doGameItaration
-commandList = []
-
-for room in rooms:
-    for item in rooms[room]:
-        for command in rooms[room][item][1]:
-            commandList.append([command, item])
 
 def Examine(item):
     global currentRoom
+    global commandList
 
+    #the list of commands
     examineItem = []
 
-    for Command in commandList:
-        if Command[1] == item:
+    for Command in commandList: # commandList is a var of all commands
+        if Command[1] == item: #The [1] gets the item this command can be used on
             examineItem += Command[0]
 
-    print(rooms[currentRoom][item][0])
+    print(rooms[currentRoom][item][0]) #prints a discription of the item
     print("You can:")
 
+    #converts list into string
     y = ""
     for i in range(len(examineItem)):
 
-        y += examineItem[i]
+        y += examineItem[i] 
     print(y)
 
     print("With this item.")
@@ -98,6 +104,7 @@ def moveRoom(x):
     global rooms
     global gameIteration
 
+    #helps find what error happened
     Error = []
 
     for room in rooms:
@@ -106,15 +113,17 @@ def moveRoom(x):
                 currentRoom = x
                 print(x)
                 if x == "blueroom":
-                    gameIteration = 2
+                    gameIteration = 2 #Game iteration text changes to bluerooms
                 elif x == "redroom":
-                    gameIteration = 3
+                    gameIteration = 3 #or redrooms
             else:
                 Error.append("*")
         else:
             Error.append("")
-    print("Locked") 
+    if Error == ["*"]:
+        print("Locked") 
     print("You are now in {}".format(currentRoom))
+    #dont print the value locked only print the items
     for item in rooms[currentRoom]:
         if {"Locked" : "unlocked"} != item:
             print(item)
@@ -122,7 +131,9 @@ def moveRoom(x):
 def unlock(room):
     global invatory
     global rooms
+    #look throught every item in invotory
     for item in invatory:
+        # the first word is the room you want to unlock it unlockes
         if item.split(" ")[0] == room:
             rooms[room]["Locked"] = "unlocked"
             print("unlocked")
@@ -131,16 +142,21 @@ def unlock(room):
 
 def interact(item, command):
     try:
+        #try to execute the value (a python command) of the item in your room
         exec(rooms
             [currentRoom]
             [item][1]
             [command])
     except Exception as e:
+        #if this appears you did not enter a correct item or command
         print("Error, that is not an item or that is not a command {}".format(e))
 
 def attack(item, type):
+    #for items in your room
     for forLoopItem in rooms[currentRoom]:
+        #if you are attacking that item
         if item == forLoopItem:
+            #if you use specail you get a rand dammage, but if not then you get 5, or if  your dammage is greater than the health of the enemy than it sets it to 1
             if type == True:
                 Dammage = random.randint(2,8)
                 if Dammage < rooms[currentRoom][item][2]:
@@ -158,6 +174,8 @@ def attack(item, type):
                     rooms[currentRoom][item][0] = rooms[currentRoom][item][3][rooms[currentRoom][item][2]]
     return rooms[currentRoom][item][0]
 
+
+#system to save
 try:
     gameIteration = eval(input("Put in a password or just press enter."))
 except SyntaxError:
@@ -167,11 +185,14 @@ if gameIteration == "":
     gameIteration == 1
 
 while Quit != True:
+    #gives time for people to read, clears the screen, does GameItration and gets an input fo the command
     time.sleep(5)
     os.system("cls")
     doGameItaration()
     Command = ""
     Command = input()
+
+    #Try to exexecute a known command otherwise print an error
     try:
         if Command.split(" ")[0] == "inspect" or Command.split(" ")[0] == "examine":
             Examine(Command.split(" ")[1])
@@ -193,4 +214,3 @@ while Quit != True:
             print(help)
     except Exception as e:
         print("An error has occured. {}".format(e))
-
