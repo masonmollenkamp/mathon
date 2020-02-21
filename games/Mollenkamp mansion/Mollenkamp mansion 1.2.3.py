@@ -34,9 +34,12 @@ rooms = {"Testroom" :
              ["it's a table", {"unscrew" : """rooms[\"redroom\"].update({\"Badge\" : [\"it can go into one of the slots in the jacket.\", {\"Put pin in holes\" : \"\"\"if computerDone == 1 && input(\\\"which hole\\\") == 4:
 	print(\\\"The right latch on the white door is open\\\")
 	badge = True\"\"\"}]})"""}],
-             "chair" :
-             ["it's a chair", {"sit" : "print(\"You sit down in the chair, and think...\n\n\n\n\n\n Ok thinking is now done."}]},
-         "blueroom" :
+             "computer" :
+             ["it's a computer", {"login" : "print(\"The computer seems to be locked and it gives you a password hint: The fourth hole\")\ncomputerDone = 1"}, 0, {1 : "A note falls out of the computer, it reads 'hello i see you have smashed the only way to get out of here oh well"}]},
+         "jacket" :
+             ["it's a jacket", {"" : "print(\"\")"}, 0, {1 : "You hit the jacket, nothing happened, What did you expect"}]}, 
+"blueroom" :
+     
          {
              "Locked" : "unlocked",
              "Saw" : ["it's just a saw", {"litraly nothing" : "print(\"seriosly\")"}, 2, {1 : "the saw won't snap"}],
@@ -66,7 +69,7 @@ def doGameItaration():
     #prints all items in all rooms
     for room in rooms:
         print(room + "contains:")
-        time.sleep(1) #See 'Why list is slow.mp4'
+        #See 'Why list is slow.mp4'
         for item in rooms[room]:
             if item != "Locked":
                 print(item) 
