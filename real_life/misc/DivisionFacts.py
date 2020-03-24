@@ -17,14 +17,22 @@ for test in range(10):
             correct += 1
     
     if correct > 7:
-        factMin += correct - 8
-        factMax += correct - 8
+        #raise the max and min by the amount of correct problems more than 7.
+        factMin += correct - 7
+        factMax += correct - 7 
     else:
-        factMin -= correct
-        factMax -= correct
+        if factMin - 10 - correct > 0:
+            factMin -= 10 - correct
+        else:
+            factMin = 1
 
-    
+        if factMax - 10 - correct > 2:
+            factMax -= 10 - correct
+        else:
+            factMax = 3
+        
     print(str(correct) + "/10")
+    print("\n")
 
 
     
